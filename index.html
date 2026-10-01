@@ -16,12 +16,12 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background-color: var(--bg); color: var(--text); padding: 20px; -webkit-user-select: none; user-select: none; }
+    body { background-color: var(--bg); color: var(--text); padding: 15px; -webkit-user-select: none; user-select: none; }
     
-    .container { max-width: 900px; margin: 0 auto; background: var(--card-bg); padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-    header { text-align: center; border-bottom: 2px solid var(--primary); padding-bottom: 15px; margin-bottom: 25px; }
-    h1 { color: var(--primary); font-size: 1.6rem; }
-    h2 { color: var(--secondary); font-size: 1.2rem; margin-top: 5px; }
+    .container { max-width: 900px; margin: 0 auto; background: var(--card-bg); padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    header { text-align: center; border-bottom: 2px solid var(--primary); padding-bottom: 15px; margin-bottom: 20px; margin-top: 10px; }
+    h1 { color: var(--primary); font-size: 1.5rem; }
+    h2 { color: var(--secondary); font-size: 1.1rem; margin-top: 5px; }
 
     #timer-bar {
       position: sticky; top: 0; z-index: 100; background: var(--primary); color: #fff;
@@ -30,7 +30,7 @@
     }
     
     .section-title { background: var(--primary); color: white; padding: 10px 15px; border-radius: 5px; margin: 25px 0 15px 0; font-size: 1.1rem; }
-    .question-card { border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 20px; background: #fff; }
+    .question-card { border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-bottom: 20px; background: #fff; }
     .question-title { font-weight: bold; margin-bottom: 12px; }
 
     .options-list { list-style: none; }
@@ -39,43 +39,43 @@
     .options-list label:hover { background: #edf2f7; }
     .options-list input[type="radio"] { margin-right: 12px; }
 
-    textarea, input[type="text"], input[type="password"], select { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; margin-top: 8px; }
+    textarea, input[type="text"], input[type="number"], select { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; margin-top: 8px; }
     textarea { min-height: 80px; resize: vertical; -webkit-user-select: text; user-select: text; }
-    input[type="text"], input[type="password"] { -webkit-user-select: text; user-select: text; }
+    input[type="text"], input[type="number"] { -webkit-user-select: text; user-select: text; }
+
+    .table-num-input {
+      width: 100% !important;
+      text-align: center;
+      padding: 8px !important;
+      margin-top: 0 !important;
+      font-size: 1rem;
+    }
 
     .btn { background: var(--secondary); color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 1rem; font-weight: bold; }
     .btn:hover { background: var(--primary); }
     .btn-danger { background: var(--accent); }
 
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center; }
-    .modal-content { background: white; padding: 30px; border-radius: 8px; max-width: 500px; text-align: center; }
+    .modal-content { background: white; padding: 25px; border-radius: 8px; max-width: 450px; width: 90%; text-align: center; }
 
-    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9rem; }
     th, td { border: 1px solid var(--border); padding: 8px; text-align: center; }
     th { background-color: #edf2f7; }
 
     .hidden { display: none !important; }
     .img-container { text-align: center; margin: 15px 0; }
-    .img-container img { max-width: 100%; height: auto; border: 1px solid var(--border); border-radius: 6px; }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <!-- ENLACE DE ACCESO DOCENTE -->
-  <div style="text-align: right; margin-bottom: 10px;">
-    <button type="button" onclick="openTeacherLogin()" style="background:none; border:none; color:#718096; cursor:pointer; font-size:0.85rem; text-decoration:underline;">
-      🔒 Acceso Docente
-    </button>
-  </div>
-
   <header>
     <h1>INSTITUCIÓN EDUCATIVA</h1>
     <h2>EVALUACIÓN DE MATEMÁTICAS — 9.° GRADO</h2>
     <p style="margin-top:8px; font-size: 0.9rem;">Tiempo asignado: 50 minutos | Un solo intento permitido</p>
   </header>
 
-  <!-- FORMULARIO DE INGRESO DEL ESTUDIANTE -->
+  <!-- FORMULARIO DE INGRESO -->
   <div id="login-screen">
     <h3>Datos del Estudiante</h3>
     <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">Complete sus datos para iniciar la evaluación.</p>
@@ -258,32 +258,32 @@
             <tr>
               <td>0 - 4</td>
               <td>4</td>
-              <td><input type="text" onblur="autoSave('tab_pm1', this.value)"></td>
-              <td><input type="text" onblur="autoSave('tab_pmf1', this.value)"></td>
+              <td><input type="number" step="any" class="table-num-input" placeholder="0.0" onblur="autoSave('tab_pm1', this.value)"></td>
+              <td><input type="number" step="any" class="table-num-input" placeholder="0.0" onblur="autoSave('tab_pmf1', this.value)"></td>
             </tr>
             <tr>
               <td>4 - 8</td>
               <td>8</td>
-              <td><input type="text" onblur="autoSave('tab_pm2', this.value)"></td>
-              <td><input type="text" onblur="autoSave('tab_pmf2', this.value)"></td>
+              <td><input type="number" step="any" class="table-num-input" placeholder="0.0" onblur="autoSave('tab_pm2', this.value)"></td>
+              <td><input type="number" step="any" class="table-num-input" placeholder="0.0" onblur="autoSave('tab_pmf2', this.value)"></td>
             </tr>
             <tr>
               <td>8 - 12</td>
               <td>6</td>
-              <td><input type="text" onblur="autoSave('tab_pm3', this.value)"></td>
-              <td><input type="text" onblur="autoSave('tab_pmf3', this.value)"></td>
+              <td><input type="number" step="any" class="table-num-input" placeholder="0.0" onblur="autoSave('tab_pm3', this.value)"></td>
+              <td><input type="number" step="any" class="table-num-input" placeholder="0.0" onblur="autoSave('tab_pmf3', this.value)"></td>
             </tr>
             <tr>
               <td>12 - 16</td>
               <td>2</td>
-              <td><input type="text" onblur="autoSave('tab_pm4', this.value)"></td>
-              <td><input type="text" onblur="autoSave('tab_pmf4', this.value)"></td>
+              <td><input type="number" step="any" class="table-num-input" placeholder="0.0" onblur="autoSave('tab_pm4', this.value)"></td>
+              <td><input type="number" step="any" class="table-num-input" placeholder="0.0" onblur="autoSave('tab_pmf4', this.value)"></td>
             </tr>
             <tr>
               <td><strong>Total</strong></td>
               <td><strong>20</strong></td>
               <td>-</td>
-              <td><input type="text" onblur="autoSave('tab_pmf_tot', this.value)"></td>
+              <td><input type="number" step="any" class="table-num-input" placeholder="Total" onblur="autoSave('tab_pmf_tot', this.value)"></td>
             </tr>
           </tbody>
         </table>
@@ -299,73 +299,27 @@
     </form>
   </div>
 
-  <!-- PANTALLA FINAL DE RESULTADOS -->
-  <div id="result-screen" class="hidden" style="text-align: center; padding: 40px 20px;">
-    <h2 id="res-status-title" style="color: green; font-size: 1.8rem;">Evaluación enviada correctamente.</h2>
-    <p style="margin: 15px 0;">Sus respuestas han sido registradas de forma segura.</p>
-    <div style="background: #edf2f7; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: left; display: inline-block; min-width: 280px;">
-      <p><strong>Estudiante:</strong> <span id="res-name"></span></p>
-      <p><strong>Sección:</strong> <span id="res-section"></span></p>
-      <p><strong>Tiempo utilizado:</strong> <span id="res-time"></span></p>
-      <p><strong>Estado del intento:</strong> <span id="res-status">COMPLETADO</span></p>
-      <p style="margin-top: 10px; font-size: 1.1rem;"><strong>Calificación:</strong> <span id="res-grade">--</span></p>
-    </div>
-    <div style="background: #fff5f5; border: 1px solid #feb2b2; color: #c53030; padding: 15px; border-radius: 6px; margin-top: 15px;">
-      ⚠️ <strong>ATENCIÓN:</strong> Por favor tome una captura de pantalla a esta ventana para certificar la entrega de su evaluación en clase.
-    </div>
-  </div>
-
-  <!-- PANEL PRIVADO DOCENTE -->
-  <div id="teacher-panel" class="hidden" style="margin-top: 20px; border-top: 2px solid var(--primary); padding-top: 20px;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
-      <h2>Panel de Control Docente</h2>
-      <button class="btn" onclick="exportToCSV()" style="background: #2f855a;">📥 Exportar a CSV (Excel)</button>
+  <!-- PANTALLA COMPROBANTE FINAL -->
+  <div id="result-screen" class="hidden" style="text-align: center; padding: 20px 10px;">
+    <h2 id="res-status-title" style="color: green; font-size: 1.6rem;">Evaluación Finalizada</h2>
+    <p style="margin: 10px 0; color: #4a5568;">Sus respuestas han sido guardadas y enviadas en tiempo real al docente.</p>
+    
+    <div style="background: #edf2f7; padding: 20px; border-radius: 8px; margin: 15px 0; text-align: left; display: inline-block; width: 100%; max-width: 400px; border: 1px solid var(--border);">
+      <p style="margin-bottom: 8px;"><strong>Estudiante:</strong> <span id="res-name"></span></p>
+      <p style="margin-bottom: 8px;"><strong>Sección:</strong> <span id="res-section"></span></p>
+      <p style="margin-bottom: 8px;"><strong>Tiempo utilizado:</strong> <span id="res-time"></span></p>
+      <p style="margin-bottom: 8px;"><strong>Salidas detectadas:</strong> <span id="res-exits">0</span></p>
+      <p style="margin-bottom: 8px;"><strong>Estado:</strong> <span id="res-status">COMPLETADO</span></p>
+      <hr style="margin: 12px 0; border: 0; border-top: 1px solid #cbd5e0;">
+      <p style="font-size: 1.2rem;"><strong>Calificación Parte II:</strong> <br><span id="res-grade" style="font-weight: bold; color: #2b6cb0;">--</span></p>
     </div>
 
-    <div style="margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
-      <input type="text" id="filter-name" placeholder="Filtrar por nombre..." onkeyup="filterTable()" style="margin: 0; flex: 1;">
-      <select id="filter-status" onchange="filterTable()" style="margin: 0; width: 200px;">
-        <option value="">Todos los estados</option>
-        <option value="COMPLETADO">COMPLETADO</option>
-        <option value="ANULADO">ANULADO</option>
-        <option value="TIEMPO AGOTADO">TIEMPO AGOTADO</option>
-      </select>
+    <div style="background: #fff5f5; border: 1px solid #feb2b2; color: #c53030; padding: 15px; border-radius: 6px; margin-top: 10px; font-size: 0.95rem;">
+      📸 <strong>INSTRUCCIÓN:</strong> Tome captura de pantalla a esta ventana para certificar la entrega de su evaluación.
     </div>
-
-    <div style="overflow-x: auto;">
-      <table id="teacher-table">
-        <thead>
-          <tr>
-            <th>Estudiante</th>
-            <th>Sección</th>
-            <th>Hora Inicio</th>
-            <th>Tiempo</th>
-            <th>Salidas</th>
-            <th>Nota</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
-        <tbody id="teacher-table-body">
-          <!-- Datos cargados dinámicamente -->
-        </tbody>
-      </table>
-    </div>
-    <button class="btn btn-danger" onclick="closeTeacherPanel()" style="margin-top: 15px;">Cerrar Panel Docente</button>
   </div>
 </div>
 
-<!-- MODAL LOGIN DOCENTE -->
-<div id="teacher-login-modal" class="modal">
-  <div class="modal-content">
-    <h3>Acceso Privado Docente</h3>
-    <p style="margin: 10px 0; font-size: 0.9rem; color: #666;">Ingrese la clave de administración:</p>
-    <input type="password" id="teacher-pass" placeholder="Contraseña..." style="margin-bottom: 15px;">
-    <button class="btn" onclick="checkTeacherPass()">Ingresar</button>
-    <button class="btn btn-danger" onclick="closeTeacherLogin()" style="margin-left: 5px;">Cancelar</button>
-  </div>
-</div>
-
-<!-- MODAL DE ADVERTENCIAS / SALIDAS -->
 <div id="warning-modal" class="modal">
   <div class="modal-content">
     <h3 style="color: var(--accent);" id="modal-title">¡ADVERTENCIA DE SEGURIDAD!</h3>
@@ -375,10 +329,11 @@
 </div>
 
 <script>
-  // BANCO DE OPCIONES ORIGINALES Y CLAVES
+  // URL INTEGRADA DE TU GOOGLE APPS SCRIPT
+  const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbxIrajg9VPzhvBOrkolW8b2twPixZmvn28jgUDz3j0kKcrEFBoRDNWXrkWGwmMSU2EwGw/exec";
+
   const RAW_OPTIONS = {
     p2_1: {
-      q: "1",
       opts: [
         { id: "o1", text: "20 cm", correct: false },
         { id: "o2", text: "25 cm", correct: true },
@@ -387,7 +342,6 @@
       ]
     },
     p2_2: {
-      q: "2",
       opts: [
         { id: "o1", text: "48 cm", correct: false },
         { id: "o2", text: "12 cm", correct: true },
@@ -396,7 +350,6 @@
       ]
     },
     p2_3: {
-      q: "3",
       opts: [
         { id: "o1", text: "10 m", correct: true },
         { id: "o2", text: "40 m", correct: false },
@@ -405,7 +358,6 @@
       ]
     },
     p2_4: {
-      q: "4",
       opts: [
         { id: "o1", text: "10 m", correct: false },
         { id: "o2", text: "12 m", correct: true },
@@ -414,7 +366,6 @@
       ]
     },
     p2_6: {
-      q: "6",
       opts: [
         { id: "o1", text: "h = 8 cm, V = 96π cm³", correct: true },
         { id: "o2", text: "h = 8 cm, V = 288π cm³", correct: false },
@@ -423,7 +374,6 @@
       ]
     },
     p2_7: {
-      q: "7",
       opts: [
         { id: "o1", text: "11.5", correct: false },
         { id: "o2", text: "4.5", correct: true },
@@ -432,7 +382,6 @@
       ]
     },
     p2_8: {
-      q: "8",
       opts: [
         { id: "o1", text: "3.2 kg", correct: false },
         { id: "o2", text: "5.7 kg", correct: false },
@@ -441,7 +390,6 @@
       ]
     },
     p2_9: {
-      q: "9",
       opts: [
         { id: "o1", text: "84°", correct: false },
         { id: "o2", text: "90°", correct: false },
@@ -457,9 +405,6 @@
   let totalSeconds = 50 * 60;
   let answers = {};
   let examActive = false;
-
-  const TEACHER_PASS = "1234"; // 🔑 Clave de acceso al panel docente
-  let allAttempts = JSON.parse(localStorage.getItem('evaluaciones_registradas')) || [];
 
   function shuffle(array) {
     let arr = [...array];
@@ -494,8 +439,7 @@
     e.preventDefault();
     studentData.name = document.getElementById('std-name').value.trim();
     studentData.section = document.getElementById('std-section').value;
-    studentData.grade = "9.º Grado";
-    studentData.startTime = new Date().toISOString();
+    studentData.startTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     document.getElementById('login-screen').classList.add('hidden');
     document.getElementById('exam-screen').classList.remove('hidden');
@@ -509,11 +453,7 @@
 
   function requestFullScreen() {
     const elem = document.documentElement;
-    if (elem.requestFullscreen) { 
-      elem.requestFullscreen().catch(() => {}); 
-    } else if (elem.webkitRequestFullscreen) { 
-      elem.webkitRequestFullscreen(); 
-    }
+    if (elem.requestFullscreen) { elem.requestFullscreen().catch(() => {}); }
   }
 
   function startTimer() {
@@ -554,16 +494,11 @@
 
     document.addEventListener('fullscreenchange', () => {
       if (!document.fullscreenElement && examActive) {
-        triggerSecurityViolation('Salida del modo pantalla completa');
+        triggerSecurityViolation('Salida de pantalla completa');
       }
     });
 
     document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('keydown', e => {
-      if (e.ctrlKey && ['c', 'v', 'x', 'u', 'p', 'tab'].includes(e.key.toLowerCase())) {
-        e.preventDefault();
-      }
-    });
   }
 
   function triggerSecurityViolation(reason) {
@@ -574,9 +509,9 @@
     exitCount++;
 
     if (exitCount === 1) {
-      showModal("ADVERTENCIA (1/2)", `Se ha detectado una salida del examen (${reason}). El incidente ha sido registrado.`);
+      showModal("ADVERTENCIA (1/2)", `Se ha detectado una salida del examen (${reason}).`);
     } else if (exitCount === 2) {
-      showModal("ADVERTENCIA FINAL (2/2)", `⚠️ ¡Atención! Se detectó otra salida (${reason}). La próxima salida provocará la ANULACIÓN AUTOMÁTICA de tu examen.`);
+      showModal("ADVERTENCIA FINAL (2/2)", `⚠️ ¡Atención! La próxima salida provocará la ANULACIÓN de tu examen.`);
     } else if (exitCount >= 3) {
       finishExam("ANULADO");
     }
@@ -594,7 +529,7 @@
   }
 
   function confirmSubmit() {
-    if (confirm("¿Está seguro de que desea finalizar y enviar su evaluación? No podrá modificar sus respuestas después.")) {
+    if (confirm("¿Está seguro de que desea finalizar y enviar su evaluación?")) {
       finishExam("COMPLETADO");
     }
   }
@@ -621,24 +556,6 @@
     };
   }
 
-  function saveAttemptToDatabase(status, scoreData, usedTimeSeconds) {
-    const mins = Math.floor(usedTimeSeconds / 60);
-    const secs = usedTimeSeconds % 60;
-
-    const record = {
-      name: studentData.name || "Desconocido",
-      section: studentData.section || "-",
-      startTime: new Date(studentData.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      usedTime: `${mins}m ${secs}s`,
-      exits: exitCount,
-      grade: status === "ANULADO" ? "0.0" : scoreData.grade,
-      status: status
-    };
-
-    allAttempts.push(record);
-    localStorage.setItem('evaluaciones_registradas', JSON.stringify(allAttempts));
-  }
-
   function finishExam(status) {
     examActive = false;
     clearInterval(timerInterval);
@@ -652,119 +569,43 @@
     document.getElementById('res-name').innerText = studentData.name;
     document.getElementById('res-section').innerText = studentData.section;
     document.getElementById('res-time').innerText = `${mins}m ${secs}s`;
+    document.getElementById('res-exits').innerText = exitCount;
     document.getElementById('res-status').innerText = status;
 
     const score = calculateScore();
-
     const gradeElement = document.getElementById('res-grade');
-    if (gradeElement) {
-      if (status === "ANULADO") {
-        gradeElement.innerText = "0.0 (Anulado)";
-        gradeElement.style.color = "red";
-      } else {
-        gradeElement.innerText = `${score.grade} / 10.0 (${score.correct} de ${score.total} aciertos)`;
-        gradeElement.style.color = score.grade >= 6.0 ? "green" : "red";
-      }
-    }
+
+    let finalNotaStr = status === "ANULADO" ? "0.0" : score.grade;
 
     if (status === "ANULADO") {
+      gradeElement.innerText = "0.0 (ANULADO POR SALIDAS)";
+      gradeElement.style.color = "red";
       document.getElementById('res-status-title').innerText = "EVALUACIÓN ANULADA";
       document.getElementById('res-status-title').style.color = "red";
     } else if (status === "TIEMPO AGOTADO") {
+      gradeElement.innerText = `${score.grade} / 10.0 (${score.correct} de ${score.total} aciertos)`;
       document.getElementById('res-status-title').innerText = "TIEMPO AGOTADO";
       document.getElementById('res-status-title').style.color = "orange";
-    }
-
-    saveAttemptToDatabase(status, score, usedTime);
-  }
-
-  // LÓGICA DEL PANEL DOCENTE
-  function openTeacherLogin() {
-    document.getElementById('teacher-login-modal').style.display = 'flex';
-  }
-
-  function closeTeacherLogin() {
-    document.getElementById('teacher-login-modal').style.display = 'none';
-  }
-
-  function checkTeacherPass() {
-    const inputPass = document.getElementById('teacher-pass').value;
-    if (inputPass === TEACHER_PASS) {
-      closeTeacherLogin();
-      document.getElementById('teacher-panel').classList.remove('hidden');
-      renderTeacherTable();
     } else {
-      alert("Contraseña incorrecta.");
-    }
-  }
-
-  function closeTeacherPanel() {
-    document.getElementById('teacher-panel').classList.add('hidden');
-  }
-
-  function renderTeacherTable() {
-    const tbody = document.getElementById('teacher-table-body');
-    tbody.innerHTML = '';
-
-    if (allAttempts.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="7">No hay evaluaciones registradas aún.</td></tr>';
-      return;
+      gradeElement.innerText = `${score.grade} / 10.0 (${score.correct} de ${score.total} aciertos)`;
+      gradeElement.style.color = score.grade >= 6.0 ? "green" : "red";
     }
 
-    allAttempts.forEach(item => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td style="text-align: left;">${item.name}</td>
-        <td>${item.section}</td>
-        <td>${item.startTime}</td>
-        <td>${item.usedTime}</td>
-        <td>${item.exits}</td>
-        <td><strong>${item.grade}</strong></td>
-        <td><span style="color: ${item.status === 'ANULADO' ? 'red' : 'green'}; font-weight: bold;">${item.status}</span></td>
-      `;
-      tbody.appendChild(tr);
-    });
-  }
-
-  function filterTable() {
-    const nameFilter = document.getElementById('filter-name').value.toLowerCase();
-    const statusFilter = document.getElementById('filter-status').value;
-    const rows = document.querySelectorAll('#teacher-table-body tr');
-
-    rows.forEach(row => {
-      const name = row.children[0]?.innerText.toLowerCase() || '';
-      const status = row.children[6]?.innerText || '';
-      const matchesName = name.includes(nameFilter);
-      const matchesStatus = statusFilter === '' || status === statusFilter;
-
-      if (matchesName && matchesStatus) {
-        row.style.display = '';
-      } else {
-        row.style.display = 'none';
-      }
-    });
-  }
-
-  function exportToCSV() {
-    if (allAttempts.length === 0) {
-      alert("No hay datos para exportar.");
-      return;
-    }
-
-    let csvContent = "data:text/csv;charset=utf-8,";
-    csvContent += "Estudiante,Seccion,Hora Inicio,Tiempo Utilizado,Salidas Detectadas,Nota,Estado\n";
-
-    allAttempts.forEach(row => {
-      csvContent += `"${row.name}","${row.section}","${row.startTime}","${row.usedTime}",${row.exits},"${row.grade}","${row.status}"\n`;
-    });
-
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `Resultados_Evaluacion_9no_${new Date().toISOString().slice(0,10)}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // ENVÍO EN TIEMPO REAL A TU GOOGLE SHEETS
+    fetch(GOOGLE_SHEETS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: studentData.name,
+        section: studentData.section,
+        startTime: studentData.startTime,
+        usedTime: `${mins}m ${secs}s`,
+        exits: exitCount,
+        grade: finalNotaStr,
+        status: status
+      })
+    }).catch(err => console.log(err));
   }
 </script>
 </body>
